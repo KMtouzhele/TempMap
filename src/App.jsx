@@ -1,6 +1,7 @@
 import { useState } from "react";
 import MapComponent from "./components/MapComponent";
 import Sidebar from "./components/Sidebar";
+import DetailIcon from "./components/DetailIcon";
 import "leaflet/dist/leaflet.css";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     const [loading, setLoading] = useState(false);
     const [temperature, setTemperature] = useState(null);
     const [feelsLike, setFeelsLike] = useState(null);
+    const [name, setName] = useState(null);
 
     const handleStyleChange = (e) => setMapStyle(e.target.value);
 
@@ -27,23 +29,11 @@ function App() {
         }
     };
 
-    const detailIcon = L.divIcon({
-        className: "custom-bubble-icon",
-        html: `
-            <div style="background-color: rgba(0, 0, 0, 0.7); color: white; padding: 10px 15px; border-radius: 15px; text-align: center;">
-                <span>Temperature: ${temperature || "Click to get temp"}</span>
-                <span>Feels like: ${feelsLike || "N/A"}</span>
-            </div>
-        `,
-        iconSize: [150, 60],
-        iconAnchor: [75, 60]
-    });
-
     return (
         <div style={{ display: "flex", height: "100vh", width: "100vw", justifyContent: "center", alignItems: "center" }}>
             <div style={{ display: "flex", width: "80%", height: "80%", justifyContent: "space-between" }}>
-                <MapComponent {...{ location, setLocation, setTemperature, setFeelsLike, mapStyle, temperature, feelsLike, loading, detailIcon }} />
-                <Sidebar {...{ location, handleGetLocation, handleStyleChange, loading }} />
+                <MapComponent {...{ location, setLocation, temperature, setTemperature, setFeelsLike, name, setName, mapStyle,  feelsLike, loading, DetailIcon }} />
+                <Sidebar {...{ handleGetLocation, handleStyleChange, loading }} />
             </div>
         </div>
     );

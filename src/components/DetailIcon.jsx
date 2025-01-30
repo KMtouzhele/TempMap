@@ -1,6 +1,6 @@
 import L from 'leaflet';
 
-const DetailIcon = ({ temperature, feelsLike }) => {
+const DetailIcon = ({ name, temperature, feelsLike }) => {
     return L.divIcon({
         className: 'custom-bubble-icon',
         html: `
@@ -17,6 +17,7 @@ const DetailIcon = ({ temperature, feelsLike }) => {
                 display: inline-block;
                 white-space: nowrap;
             ">
+            <span style="display: block;">${name || 'Region name is not available'}</span>
             <span style="display: block;">Temperature: ${temperature || 'Click to get temp'}</span>
             <span style="display: block;">Feels like: ${feelsLike || 'N/A'}</span>
                 <div style="

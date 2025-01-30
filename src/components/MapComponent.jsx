@@ -6,20 +6,22 @@ import DetailIcon from "./DetailIcon";
 const MapComponent = ({
                           location,
                           setLocation,
+                          temperature,
                           setTemperature,
+                          feelsLike,
                           setFeelsLike,
                           mapStyle,
-                          temperature,
-                          feelsLike,
+                          name,
+                          setName,
                           loading
 }) => {
     return (
         <div style={{ width: "80%", height: "100%" }}>
             <MapContainer center={location} zoom={13} style={{ height: "100%", width: "100%" }}>
                 <MapUpdater center={location} />
-                <MapClickHandler setLocation={setLocation} setTemp={setTemperature} setFeelsLike={setFeelsLike} />
+                <MapClickHandler setLocation={setLocation} setTemp={setTemperature} setFeelsLike={setFeelsLike} setName={setName} />
                 <TileLayer url={mapStyle} />
-                {temperature && <Marker position={location} icon={DetailIcon({ temperature, feelsLike })} />}
+                {temperature && <Marker position={location} icon={DetailIcon({ name, temperature, feelsLike })} />}
                 {loading && (
                     <div style={{
                         position: "absolute",
